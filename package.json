@@ -1,6 +1,6 @@
 {
   "name": "@srttk/queue",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "BullMQ queues simplified.",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -11,7 +11,7 @@
     "example3": "tsx ./src/example/app3-namespace.ts",
     "example4": "tsx ./src/example/app4-graceful-shutdown.ts",
     "example5": "tsx ./src/example/app5.life-cycle-events.ts",
-    "example6":"tsx ./src/example/example-scheduler.ts",
+    "example6": "tsx ./src/example/example-scheduler.ts",
     "build": "pkgroll"
   },
   "repository": {
