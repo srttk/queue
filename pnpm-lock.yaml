@@ -7,13 +7,14 @@ settings:
 importers:
 
   .:
+    dependencies:
+      bullmq:
+        specifier: ^5.0.0
+        version: 5.29.1
     devDependencies:
       '@types/node':
         specifier: ^22.9.3
         version: 22.9.3
-      bullmq:
-        specifier: ^5.29.1
-        version: 5.29.1
       pkgroll:
         specifier: ^2.5.1
         version: 2.5.1(typescript@5.7.2)

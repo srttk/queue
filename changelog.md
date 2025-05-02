@@ -18,4 +18,4 @@
 
 ## 1.1.4
   - [x] - scheduleJob, removeScheduleJob
-  - [ ] //TODO - Document scheduledJon, removeScheduleJob
+  - [ ] //TODO - Document scheduledJob, removeScheduleJob
