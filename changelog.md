@@ -13,4 +13,9 @@
     - [x]  Documentations
 
 ## 1.0.4
-    - [ ] Default configurations ( Default queue config, default worker config default job config)
+    - [x] Default configurations ( Default queue config, default worker config default job config)
+
+
+## 1.1.4
+  - [x] - scheduleJob, removeScheduleJob
+  - [ ] //TODO - Document scheduledJob, removeScheduleJob

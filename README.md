@@ -179,6 +179,38 @@ export const emailProcessor: IQueueProcess<EmailPayload> = {
 }
 ```
 
+## Scheduled Jobs
+
+The QueueManager provides a way to schedule recurring jobs using BullMQ's scheduler functionality.
+
+### Scheduling Jobs
+
+Use the `scheduleJob` method to create or update a scheduled job:
+
+```typescript
+// Schedule a job to run every day at 9:00 AM
+await queue.scheduleJob(
+  "greet",                   // Queue name
+  "daily-greeting",          // Scheduler ID
+  { 
+    pattern: "0 9 * * *"     // Cron pattern
+  },
+  {
+    name: "morning-greeting", // Job name
+    data: { name: "Team" },   // Job payload
+    opts: { priority: 2 }     // Optional job options
+  }
+);
+```
+
+### Removing Scheduled Jobs
+
+To remove a scheduled job:
+
+```typescript
+await queue.removeScheduleJob("greet", "daily-greeting");
+```
+
 ## Graceful shutdown
 QueueManager provides a graceful shutdown mechanism to ensure that in-progress jobs are completed and resources are properly released when your application terminates.
 

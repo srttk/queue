@@ -5,6 +5,7 @@ import {
   WorkerOptions,
   ConnectionOptions,
   JobsOptions,
+  RepeatOptions,
 } from "bullmq";
 import { IQueueProcess } from "./queue-process";
 
@@ -175,6 +176,51 @@ export class QueueManager<T extends Record<string, IQueueProcess>> {
     let job = await queue.add(jobname, payload, _jobOptions);
 
     return job;
+  }
+
+  // Add to scheduler
+
+  async scheduleJob<K extends keyof T>(
+    name: K,
+    schedulerId: string,
+    repeat: Omit<RepeatOptions, "key">,
+    payload: {
+      name: string;
+      data?: T[K] extends IQueueProcess<infer P> ? P : never;
+      opts?: JobsOptions;
+    }
+  ) {
+    let qMapItem = this.getFromMapByName(name);
+    if (!qMapItem) {
+      console.warn(`Queue ${String(name)} not found.`);
+      return null;
+    }
+    // Get queue
+    let queue = this.getQueueByName(qMapItem.name);
+
+    if (!queue) {
+      console.warn(`Queue ${String(name)} not initialized.`);
+      return null;
+    }
+
+    return await queue.upsertJobScheduler(schedulerId, repeat, payload);
+  }
+
+  async removeScheduleJob<K extends keyof T>(name: K, schedulerId: string) {
+    let qMapItem = this.getFromMapByName(name);
+    if (!qMapItem) {
+      console.warn(`Queue ${String(name)} not found.`);
+      return null;
+    }
+    // Get queue
+    let queue = this.getQueueByName(qMapItem.name);
+
+    if (!queue) {
+      console.warn(`Queue ${String(name)} not initialized.`);
+      return null;
+    }
+
+    return await queue.removeJobScheduler(schedulerId);
   }
 
   // Get all registered queues
